@@ -1,0 +1,32 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/RAM8.hdl
+/**
+ * Memory of eight 16-bit registers.
+ * If load is asserted, the value of the register selected by
+ * address is set to in; Otherwise, the value does not change.
+ * The value of the selected register is emitted by out.
+ */
+CHIP RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    //// Replace this comment with your code.
+    //8 registers
+    Register(in[0..15]=in[0..15],load=loadA,out[0..15]=tmp0);
+    Register(in[0..15]=in[0..15],load=loadB,out[0..15]=tmp1);
+    Register(in[0..15]=in[0..15],load=loadC,out[0..15]=tmp2);
+    Register(in[0..15]=in[0..15],load=loadD,out[0..15]=tmp3);
+    Register(in[0..15]=in[0..15],load=loadE,out[0..15]=tmp4);
+    Register(in[0..15]=in[0..15],load=loadF,out[0..15]=tmp5);
+    Register(in[0..15]=in[0..15],load=loadG,out[0..15]=tmp6);
+    Register(in[0..15]=in[0..15],load=loadH,out[0..15]=tmp7);
+
+    Mux8Way16(a[0..15]=tmp0,b[0..15]=tmp1,c[0..15]=tmp2,d[0..15]=tmp3,e[0..15]=tmp4,f[0..15]=tmp5,g[0..15]=tmp6,h[0..15]=tmp7, sel[0]=address[0], sel[1]=address[1], sel[2]=address[2], out[0..15]=out[0..15]);
+    
+    DMux8Way(in=load, sel[0]=address[0], sel[1]=address[1], sel[2]=address[2], a=loadA, b=loadB, c=loadC, d=loadD, e=loadE,f=loadF,g=loadG,h=loadH);
+
+
+}
